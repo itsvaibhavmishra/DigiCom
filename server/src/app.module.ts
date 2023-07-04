@@ -1,9 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { MongooseModule } from '@nestjs/mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 @Module({
-  imports: [],
+  imports: [
+    MongooseModule.forRoot(process.env.MONGODB_URI, {
+      w: 1,
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
